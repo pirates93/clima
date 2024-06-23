@@ -1,0 +1,1729 @@
+cards:
+  - type: custom:hui-element
+    card_type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            entity: climate.cdz_salone
+            show_name: true
+            show_entity_picture: true
+            state:
+              - entity_picture: /local/foto-pkg/samsung off.png
+                styles:
+                  icon:
+                    - width: 30%
+                    - opacity: 0.9
+                value: 'off'
+                name: Salone
+              - entity_picture: /local/foto-pkg/samsung on.png
+                operator: default
+                styles:
+                  icon:
+                    - width: 30%
+                    - color: rgb(240,253,240)
+                state:
+                  - justify-self: start
+                  - font-size: 12px
+                  - padding: 0px 5px
+                value: 'on'
+                name: Salone
+            styles:
+              card: null
+            tap_action:
+              action: null
+            hold_action:
+              action: more-info
+      - type: custom:paper-buttons-row
+        buttons:
+          - icon: hass:cog-outline
+            state: '{{ states(''group.notifiche_server'') }}'
+            state_styles:
+              'on':
+                icon:
+                  color: var(--paper-item-icon-active-color)
+            tap_action:
+              action: fire-dom-event
+              browser_mod:
+                service: browser_mod.popup
+                data:
+                  title: Impostazioni
+                  style: |
+                    --popup-background-color: var(--secondary-background-color);
+                    --dialog-backdrop-filter: blur(2em) brightness(0.75);
+                  content:
+                    type: entities
+                    style: |
+                      .card-header {
+                        padding: 0px 0px 0px 0px !important;
+                      }
+                    show_header_toggle: 'off'
+                    entities:
+                      - type: section
+                        label: Salone
+                      - type: custom:hui-element
+                        card_type: vertical-stack
+                        cards:
+                          - type: horizontal-stack
+                            cards:
+                              - type: custom:button-card
+                                entity: climate.cdz_salone
+                                show_name: false
+                                show_entity_picture: true
+                                state:
+                                  - entity_picture: /local/foto-pkg/samsung off.png
+                                    styles:
+                                      icon:
+                                        - width: 80%
+                                        - opacity: 0.9
+                                    value: 'off'
+                                  - entity_picture: /local/foto-pkg/samsung on.png
+                                    operator: default
+                                    styles:
+                                      icon:
+                                        - width: 80%
+                                        - color: rgb(240,253,240)
+                                    state:
+                                      - justify-self: start
+                                      - font-size: 12px
+                                      - padding: 0px 5px
+                                    value: 'on'
+                                styles:
+                                  card: null
+                                tap_action:
+                                  action: toggle
+                                hold_action:
+                                  action: more-info
+                          - type: custom:simple-thermostat
+                            entity: climate.cdz_salone
+                            header:
+                              name: Carol
+                              icon: mdi:air-conditioner
+                            layout:
+                              mode:
+                                headings: false
+                            sensors:
+                              - entity: >-
+                                  sensor.cdz_salone_relative_humidity_measurement
+                                name: Umidità
+                            themes:
+                              green:
+                                primary-color: '#406604'
+                                paper-toggle-button-checked-ink-color: '#609906'
+                                paper-toggle-button-checked-button-color: '#609906'
+                                paper-toggle-button-checked-bar-color: '#609906'
+                                label-badge-red: '#406604'
+                            control:
+                              swing:
+                                _name: Swing Mode
+                                _hide_when_off: true
+                              hvac:
+                                mode:
+                                  icon: true
+                              fan:
+                                _name: Fan Mode
+                                _hide_when_off: true
+                          - type: custom:bar-card
+                            show_icon: true
+                            align: split
+                            columns: 1
+                            max: 3200
+                            positions:
+                              icon: inside
+                              indicator: inside
+                              name: inside
+                              value: inside
+                            unit_of_measurement: A
+                            severity:
+                              - color: '#1e90ff'
+                                from: 0
+                                to: 600
+                              - color: Orange
+                                from: 601
+                                to: 1000
+                              - color: red
+                                from: 1001
+                                to: 4000
+                            style: |
+                              ha-card {
+                                --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                                --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                                --paper-item-icon-color: 'var(--text-primary-color';
+                                --ha-card-box-shadow: 'none';
+                              }
+                            entity: sensor.cdz_salone_energy
+                            name: Kwh
+                            entity_row: true
+                            decimal: 0
+                          - type: custom:bar-card
+                            show_icon: true
+                            align: split
+                            columns: 1
+                            max: 3200
+                            positions:
+                              icon: inside
+                              indicator: inside
+                              name: inside
+                              value: inside
+                            unit_of_measurement: W
+                            severity:
+                              - color: '#1e90ff'
+                                from: 0
+                                to: 600
+                              - color: Orange
+                                from: 601
+                                to: 1000
+                              - color: red
+                                from: 1001
+                                to: 4000
+                            style: |
+                              ha-card {
+                                --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                                --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                                --paper-item-icon-color: 'var(--text-primary-color';
+                                --ha-card-box-shadow: 'none';
+                              }
+                            entity: sensor.cdz_salone_power
+                            name: Watt
+                            entity_row: true
+                            decimal: 0
+                          - type: custom:bar-card
+                            show_icon: true
+                            align: split
+                            columns: 1
+                            max: 3200
+                            positions:
+                              icon: inside
+                              indicator: inside
+                              name: inside
+                              value: inside
+                            unit_of_measurement: W
+                            severity:
+                              - color: '#1e90ff'
+                                from: 0
+                                to: 600
+                              - color: Orange
+                                from: 601
+                                to: 1000
+                              - color: red
+                                from: 1001
+                                to: 4000
+                            style: |
+                              ha-card {
+                                --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                                --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                                --paper-item-icon-color: 'var(--text-primary-color';
+                                --ha-card-box-shadow: 'none';
+                              }
+                            entity: sensor.cdz_salone_air_quality
+                            name: Qualità Aria
+                            entity_row: true
+                            decimal: 0
+                          - type: custom:paper-buttons-row
+                            buttons:
+                              - icon: hass:cog-outline
+                                state: >-
+                                  {{
+                                  states('group.notifiche_elettrodomestici_7')
+                                  }}
+                                state_styles:
+                                  'on':
+                                    icon:
+                                      color: var(--paper-item-icon-active-color)
+                                tap_action:
+                                  action: fire-dom-event
+                                  browser_mod:
+                                    service: browser_mod.popup
+                                    data:
+                                      title: Impostazioni
+                                      style: >
+                                        --popup-background-color:
+                                        var(--secondary-background-color);
+
+                                        --dialog-backdrop-filter: blur(2em)
+                                        brightness(0.75);
+                                      content:
+                                        type: entities
+                                        entities:
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - entity: sensor.time
+                                            name: Orologio
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: >-
+                                              input_datetime.orario_fine_notifiche_elettrodomestici_7
+                                            icon: mdi:timer
+                                            name: Fascia Oraria Notifiche
+                                            state_header: FINE
+                                            entities:
+                                              - entity: >-
+                                                  input_datetime.orario_inizio_notifiche_elettrodomestici_7
+                                                name: INIZIO
+                                          - entity: >-
+                                              input_boolean.notify_push_elettrodomestici_7
+                                            type: custom:multiple-entity-row
+                                            name: Notifiche
+                                            icon: mdi:cellphone-message
+                                            state_header: PUSH
+                                            toggle: true
+                                            entities:
+                                              - entity: >-
+                                                  input_boolean.notify_telegram_elettrodomestici_7
+                                                name: TELEGRAM
+                                                toggle: true
+                                              - entity: >-
+                                                  input_boolean.notify_alexa_elettrodomestici_7
+                                                name: ALEXA
+                                                toggle: true
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: binary_sensor.ac_elettrodomestici_7
+                                            icon: mdi:flash
+                                            name: Energia
+                                            state_header: STATO
+                                            state_color: false
+                                            entities:
+                                              - entity: input_boolean.switch_elettrodomestici_7
+                                                name: SWITCH
+                                                toggle: true
+                                              - entity: >-
+                                                  input_number.soglia_lavoro_elettrodomestici_w_7
+                                                name: SOGLIA
+                                              - entity: >-
+                                                  input_number.tempo_innesco_elettrodomestici_m_7
+                                                name: DELAY OFF
+                                              - entity: >-
+                                                  input_number.avvio_ritardato_conteggio_elettrodomestici_s_7
+                                                name: DELAY ON
+                                          - type: divider
+                                          - entity: input_text.messaggio_elettrodomestico_7
+                                            type: custom:multiple-entity-row
+                                            name: CDZ Carol
+                                            state_header: MESSAGGIO
+                                            toggle: false
+                                            icon: mdi:rename
+                                            entities:
+                                              - entity: input_text.nome_elettrodomestico_7
+                                                name: CDZ Carol
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: >-
+                                              input_text.data_reset_sensori_elettrodomestici_7
+                                            name: Reset Contatori
+                                            icon: mdi:restart
+                                            state_header: ULTIMO RESET
+                                            state_color: true
+                                            entities:
+                                              - type: button
+                                                name: ESEGUI
+                                                icon: mdi:button-pointer
+                                                tap_action:
+                                                  action: call-service
+                                                  service: script.reset_sensori_elettrodomestici_7
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: input_number.costo_energia_asciugatrice
+                                            name: Costo Energia
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                              - icon: hass:chart-line
+                                state: '{{ states(''xxx'') }}'
+                                state_styles:
+                                  'on':
+                                    icon:
+                                      color: var(--paper-item-icon-active-color)
+                                tap_action:
+                                  action: fire-dom-event
+                                  browser_mod:
+                                    service: browser_mod.popup
+                                    data:
+                                      title: Statistiche
+                                      style: >
+                                        --popup-background-color:
+                                        var(--secondary-background-color);
+
+                                        --dialog-backdrop-filter: blur(2em)
+                                        brightness(0.75);
+                                      content:
+                                        type: entities
+                                        entities:
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - entity: sensor.time_on_elettrodomestici_7
+                                            attribute: costo_ciclo_elettrodomestici_7
+                                            type: custom:multiple-entity-row
+                                            icon: mdi:power-plug
+                                            unit: €
+                                            name: Elettrodomestico
+                                            state_header: EURO
+                                            state_color: true
+                                            entities:
+                                              - entity: sensor.time_on_elettrodomestici_7
+                                                attribute: terminato
+                                                name: STATO
+                                              - type: attribute
+                                                entity: sensor.time_on_elettrodomestici_7
+                                                name: TEMPO
+                                                attribute: tempo_ciclo_elettrodomestici_7
+                                              - entity: sensor.time_on_elettrodomestici_7
+                                                attribute: consumo_ciclo_elettrodomestici_7
+                                                name: CONSUMO
+                                          - type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: sensor.time_on_elettrodomestici_7
+                                            attribute: costo_consumo_ieri_elettrodomestici_7
+                                            unit: €
+                                            name: Ieri
+                                            state_header: EURO
+                                            state_color: true
+                                            entities:
+                                              - entity: sensor.cicli_oggi_elettrodomestici_7
+                                                name: CICLI
+                                                attribute: last_period
+                                              - entity: sensor.time_on_elettrodomestici_7
+                                                attribute: Ieri
+                                                name: TEMPO
+                                              - entity: sensor.energy_oggi_elettrodomestici_7
+                                                attribute: last_period
+                                                unit: kWh
+                                                name: CONSUMO
+                                          - type: divider
+                                          - entity: sensor.time_on_elettrodomestici_7
+                                            type: custom:multiple-entity-row
+                                            attribute: >-
+                                              costo_consumo_giornaliero_elettrodomestici_7
+                                            unit: €
+                                            name: Oggi
+                                            state_header: EURO
+                                            icon: mdi:calendar-blank
+                                            state_color: true
+                                            entities:
+                                              - entity: sensor.cicli_oggi_elettrodomestici_7
+                                                name: CICLI
+                                              - entity: sensor.time_on_elettrodomestici_7
+                                                attribute: Oggi
+                                                name: TEMPO
+                                              - entity: sensor.energy_oggi_elettrodomestici_7
+                                                name: CONSUMO
+                                          - type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: sensor.time_on_elettrodomestici_7
+                                            attribute: costo_consumo_mensile_elettrodomestici_7
+                                            unit: €
+                                            icon: mdi:calendar-today
+                                            name: Mese
+                                            state_header: EURO
+                                            state_color: true
+                                            entities:
+                                              - entity: sensor.cicli_mese_elettrodomestici_7
+                                                name: CICLI
+                                              - entity: sensor.time_on_elettrodomestici_7
+                                                name: TEMPO
+                                                attribute: Mese
+                                              - entity: sensor.energy_mese_elettrodomestici_7
+                                                name: CONSUMO
+                                          - type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: sensor.time_on_elettrodomestici_7
+                                            attribute: costo_consumo_annuale_elettrodomestici_7
+                                            unit: €
+                                            icon: mdi:calendar-month
+                                            name: Anno
+                                            state_header: EURO
+                                            state_color: true
+                                            entities:
+                                              - entity: sensor.cicli_anno_elettrodomestici_7
+                                                name: CICLI
+                                              - entity: sensor.time_on_elettrodomestici_7
+                                                name: TEMPO
+                                                attribute: Anno
+                                              - entity: sensor.energy_anno_elettrodomestici_7
+                                                name: CONSUMO
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                              - icon: hass:bell
+                                state: >-
+                                  {{
+                                  states('input_boolean.aggiornamento_pkg_elettrodomestici_7')
+                                  }}
+                                state_styles:
+                                  'on':
+                                    icon:
+                                      color: var(--paper-item-icon-active-color)
+                                tap_action:
+                                  action: fire-dom-event
+                                  browser_mod:
+                                    service: browser_mod.popup
+                                    data:
+                                      title: Update
+                                      style: >
+                                        --popup-background-color:
+                                        var(--secondary-background-color);
+
+                                        --dialog-backdrop-filter: blur(2em)
+                                        brightness(0.75);
+                                      content:
+                                        type: entities
+                                        entities:
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - entity: >-
+                                              input_boolean.aggiornamento_pkg_elettrodomestici_7
+                                            name: Notifica Push Update
+                                            icon: mdi:bell-ring
+                                            state_color: true
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: sensor.domhouse_it
+                                            attribute: centro_controllo_elettrodomestici
+                                            state_color: true
+                                            icon: mdi:google-circles-extended
+                                            toggle: false
+                                            name: Versione
+                                            state_header: DISPONIBILE
+                                            entities:
+                                              - entity: >-
+                                                  sensor.versione_installata_centro_controllo_elettrodomestici_7
+                                                name: INSTALLATA
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                              - icon: hass:information-outline
+                                state: '{{ states(''none'') }}'
+                                state_styles:
+                                  'on':
+                                    icon:
+                                      color: var(--paper-item-icon-active-color)
+                                tap_action:
+                                  action: fire-dom-event
+                                  browser_mod:
+                                    service: browser_mod.popup
+                                    data:
+                                      title: Info Package
+                                      style: >
+                                        --popup-background-color:
+                                        var(--secondary-background-color);
+
+                                        --dialog-backdrop-filter: blur(2em)
+                                        brightness(0.75);
+                                      content:
+                                        type: markdown
+                                        content: >-
+                                          Centro Controllo Elettrodomestici
+
+                                          -------------------
+
+                                          ____
+
+                                          Scarica Update:
+
+                                          [Download](https://domhouse.it/centro-controllo-elettrodomestici-in-home-assistant)
+
+
+                                          ----
+
+                                          Created:
+                                          [DomHouse.it](https://www.domhouse.it)
+
+                                          ___
+  - type: custom:hui-element
+    card_type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            entity: climate.cdz_carol
+            show_name: true
+            show_entity_picture: true
+            state:
+              - entity_picture: /local/foto-pkg/samsung off.png
+                styles:
+                  icon:
+                    - width: 30%
+                    - opacity: 0.9
+                value: 'off'
+                name: Carol
+              - entity_picture: /local/foto-pkg/samsung on.png
+                operator: default
+                styles:
+                  icon:
+                    - width: 30%
+                    - color: rgb(240,253,240)
+                state:
+                  - justify-self: start
+                  - font-size: 12px
+                  - padding: 0px 5px
+                value: 'on'
+                name: Carol
+            styles:
+              card: null
+            tap_action:
+              action: null
+            hold_action:
+              action: more-info
+      - type: custom:paper-buttons-row
+        buttons:
+          - icon: hass:cog-outline
+            state: '{{ states(''group.notifiche_server'') }}'
+            state_styles:
+              'on':
+                icon:
+                  color: var(--paper-item-icon-active-color)
+            tap_action:
+              action: fire-dom-event
+              browser_mod:
+                service: browser_mod.popup
+                data:
+                  title: Impostazioni
+                  style: |
+                    --popup-background-color: var(--secondary-background-color);
+                    --dialog-backdrop-filter: blur(2em) brightness(0.75);
+                  content:
+                    type: entities
+                    style: |
+                      .card-header {
+                        padding: 0px 0px 0px 0px !important;
+                      }
+                    show_header_toggle: 'off'
+                    entities:
+                      - type: section
+                        label: Carol
+                      - type: custom:hui-element
+                        card_type: vertical-stack
+                        cards:
+                          - type: horizontal-stack
+                            cards:
+                              - type: custom:button-card
+                                entity: climate.cdz_carol
+                                show_name: false
+                                show_entity_picture: true
+                                state:
+                                  - entity_picture: /local/foto-pkg/samsung off.png
+                                    styles:
+                                      icon:
+                                        - width: 80%
+                                        - opacity: 0.9
+                                    value: 'off'
+                                  - entity_picture: /local/foto-pkg/samsung on.png
+                                    operator: default
+                                    styles:
+                                      icon:
+                                        - width: 80%
+                                        - color: rgb(240,253,240)
+                                    state:
+                                      - justify-self: start
+                                      - font-size: 12px
+                                      - padding: 0px 5px
+                                    value: 'on'
+                                styles:
+                                  card: null
+                                tap_action:
+                                  action: toggle
+                                hold_action:
+                                  action: more-info
+                          - type: custom:simple-thermostat
+                            entity: climate.cdz_carol
+                            header:
+                              name: Carol
+                              icon: mdi:air-conditioner
+                            layout:
+                              mode:
+                                headings: false
+                            sensors:
+                              - entity: sensor.camera_carol_umidita
+                                name: Umidità
+                            themes:
+                              green:
+                                primary-color: '#406604'
+                                paper-toggle-button-checked-ink-color: '#609906'
+                                paper-toggle-button-checked-button-color: '#609906'
+                                paper-toggle-button-checked-bar-color: '#609906'
+                                label-badge-red: '#406604'
+                            control:
+                              swing:
+                                _name: Swing Mode
+                                _hide_when_off: true
+                              hvac:
+                                mode:
+                                  icon: true
+                              fan:
+                                _name: Fan Mode
+                                _hide_when_off: true
+                          - type: custom:bar-card
+                            show_icon: true
+                            align: split
+                            columns: 1
+                            max: 3200
+                            positions:
+                              icon: inside
+                              indicator: inside
+                              name: inside
+                              value: inside
+                            unit_of_measurement: A
+                            severity:
+                              - color: '#1e90ff'
+                                from: 0
+                                to: 600
+                              - color: Orange
+                                from: 601
+                                to: 1000
+                              - color: red
+                                from: 1001
+                                to: 4000
+                            style: |
+                              ha-card {
+                                --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                                --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                                --paper-item-icon-color: 'var(--text-primary-color';
+                                --ha-card-box-shadow: 'none';
+                              }
+                            entity: sensor.cdz_carol_energy
+                            name: Kwh
+                            entity_row: true
+                            decimal: 0
+                          - type: custom:bar-card
+                            show_icon: true
+                            align: split
+                            columns: 1
+                            max: 3200
+                            positions:
+                              icon: inside
+                              indicator: inside
+                              name: inside
+                              value: inside
+                            unit_of_measurement: W
+                            severity:
+                              - color: '#1e90ff'
+                                from: 0
+                                to: 600
+                              - color: Orange
+                                from: 601
+                                to: 1000
+                              - color: red
+                                from: 1001
+                                to: 4000
+                            style: |
+                              ha-card {
+                                --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                                --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                                --paper-item-icon-color: 'var(--text-primary-color';
+                                --ha-card-box-shadow: 'none';
+                              }
+                            entity: sensor.cdz_carol_power
+                            name: Watt
+                            entity_row: true
+                            decimal: 0
+                          - type: custom:bar-card
+                            show_icon: true
+                            align: split
+                            columns: 1
+                            max: 3200
+                            positions:
+                              icon: inside
+                              indicator: inside
+                              name: inside
+                              value: inside
+                            unit_of_measurement: W
+                            severity:
+                              - color: '#1e90ff'
+                                from: 0
+                                to: 600
+                              - color: Orange
+                                from: 601
+                                to: 1000
+                              - color: red
+                                from: 1001
+                                to: 4000
+                            style: |
+                              ha-card {
+                                --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                                --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                                --paper-item-icon-color: 'var(--text-primary-color';
+                                --ha-card-box-shadow: 'none';
+                              }
+                            entity: sensor.cdz_carol_air_quality
+                            name: Qualità Aria
+                            entity_row: true
+                            decimal: 0
+                          - type: custom:paper-buttons-row
+                            buttons:
+                              - icon: hass:cog-outline
+                                state: >-
+                                  {{
+                                  states('group.notifiche_elettrodomestici_7')
+                                  }}
+                                state_styles:
+                                  'on':
+                                    icon:
+                                      color: var(--paper-item-icon-active-color)
+                                tap_action:
+                                  action: fire-dom-event
+                                  browser_mod:
+                                    service: browser_mod.popup
+                                    data:
+                                      title: Impostazioni
+                                      style: >
+                                        --popup-background-color:
+                                        var(--secondary-background-color);
+
+                                        --dialog-backdrop-filter: blur(2em)
+                                        brightness(0.75);
+                                      content:
+                                        type: entities
+                                        entities:
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - entity: sensor.time
+                                            name: Orologio
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: >-
+                                              input_datetime.orario_fine_notifiche_elettrodomestici_7
+                                            icon: mdi:timer
+                                            name: Fascia Oraria Notifiche
+                                            state_header: FINE
+                                            entities:
+                                              - entity: >-
+                                                  input_datetime.orario_inizio_notifiche_elettrodomestici_7
+                                                name: INIZIO
+                                          - entity: >-
+                                              input_boolean.notify_push_elettrodomestici_7
+                                            type: custom:multiple-entity-row
+                                            name: Notifiche
+                                            icon: mdi:cellphone-message
+                                            state_header: PUSH
+                                            toggle: true
+                                            entities:
+                                              - entity: >-
+                                                  input_boolean.notify_telegram_elettrodomestici_7
+                                                name: TELEGRAM
+                                                toggle: true
+                                              - entity: >-
+                                                  input_boolean.notify_alexa_elettrodomestici_7
+                                                name: ALEXA
+                                                toggle: true
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: binary_sensor.ac_elettrodomestici_7
+                                            icon: mdi:flash
+                                            name: Energia
+                                            state_header: STATO
+                                            state_color: false
+                                            entities:
+                                              - entity: input_boolean.switch_elettrodomestici_7
+                                                name: SWITCH
+                                                toggle: true
+                                              - entity: >-
+                                                  input_number.soglia_lavoro_elettrodomestici_w_7
+                                                name: SOGLIA
+                                              - entity: >-
+                                                  input_number.tempo_innesco_elettrodomestici_m_7
+                                                name: DELAY OFF
+                                              - entity: >-
+                                                  input_number.avvio_ritardato_conteggio_elettrodomestici_s_7
+                                                name: DELAY ON
+                                          - type: divider
+                                          - entity: input_text.messaggio_elettrodomestico_7
+                                            type: custom:multiple-entity-row
+                                            name: CDZ Carol
+                                            state_header: MESSAGGIO
+                                            toggle: false
+                                            icon: mdi:rename
+                                            entities:
+                                              - entity: input_text.nome_elettrodomestico_7
+                                                name: CDZ Carol
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: >-
+                                              input_text.data_reset_sensori_elettrodomestici_7
+                                            name: Reset Contatori
+                                            icon: mdi:restart
+                                            state_header: ULTIMO RESET
+                                            state_color: true
+                                            entities:
+                                              - type: button
+                                                name: ESEGUI
+                                                icon: mdi:button-pointer
+                                                tap_action:
+                                                  action: call-service
+                                                  service: script.reset_sensori_elettrodomestici_7
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: input_number.costo_energia_asciugatrice
+                                            name: Costo Energia
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                              - icon: hass:chart-line
+                                state: '{{ states(''xxx'') }}'
+                                state_styles:
+                                  'on':
+                                    icon:
+                                      color: var(--paper-item-icon-active-color)
+                                tap_action:
+                                  action: fire-dom-event
+                                  browser_mod:
+                                    service: browser_mod.popup
+                                    data:
+                                      title: Statistiche
+                                      style: >
+                                        --popup-background-color:
+                                        var(--secondary-background-color);
+
+                                        --dialog-backdrop-filter: blur(2em)
+                                        brightness(0.75);
+                                      content:
+                                        type: entities
+                                        entities:
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - entity: sensor.time_on_elettrodomestici_7
+                                            attribute: costo_ciclo_elettrodomestici_7
+                                            type: custom:multiple-entity-row
+                                            icon: mdi:power-plug
+                                            unit: €
+                                            name: Elettrodomestico
+                                            state_header: EURO
+                                            state_color: true
+                                            entities:
+                                              - entity: sensor.time_on_elettrodomestici_7
+                                                attribute: terminato
+                                                name: STATO
+                                              - type: attribute
+                                                entity: sensor.time_on_elettrodomestici_7
+                                                name: TEMPO
+                                                attribute: tempo_ciclo_elettrodomestici_7
+                                              - entity: sensor.time_on_elettrodomestici_7
+                                                attribute: consumo_ciclo_elettrodomestici_7
+                                                name: CONSUMO
+                                          - type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: sensor.time_on_elettrodomestici_7
+                                            attribute: costo_consumo_ieri_elettrodomestici_7
+                                            unit: €
+                                            name: Ieri
+                                            state_header: EURO
+                                            state_color: true
+                                            entities:
+                                              - entity: sensor.cicli_oggi_elettrodomestici_7
+                                                name: CICLI
+                                                attribute: last_period
+                                              - entity: sensor.time_on_elettrodomestici_7
+                                                attribute: Ieri
+                                                name: TEMPO
+                                              - entity: sensor.energy_oggi_elettrodomestici_7
+                                                attribute: last_period
+                                                unit: kWh
+                                                name: CONSUMO
+                                          - type: divider
+                                          - entity: sensor.time_on_elettrodomestici_7
+                                            type: custom:multiple-entity-row
+                                            attribute: >-
+                                              costo_consumo_giornaliero_elettrodomestici_7
+                                            unit: €
+                                            name: Oggi
+                                            state_header: EURO
+                                            icon: mdi:calendar-blank
+                                            state_color: true
+                                            entities:
+                                              - entity: sensor.cicli_oggi_elettrodomestici_7
+                                                name: CICLI
+                                              - entity: sensor.time_on_elettrodomestici_7
+                                                attribute: Oggi
+                                                name: TEMPO
+                                              - entity: sensor.energy_oggi_elettrodomestici_7
+                                                name: CONSUMO
+                                          - type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: sensor.time_on_elettrodomestici_7
+                                            attribute: costo_consumo_mensile_elettrodomestici_7
+                                            unit: €
+                                            icon: mdi:calendar-today
+                                            name: Mese
+                                            state_header: EURO
+                                            state_color: true
+                                            entities:
+                                              - entity: sensor.cicli_mese_elettrodomestici_7
+                                                name: CICLI
+                                              - entity: sensor.time_on_elettrodomestici_7
+                                                name: TEMPO
+                                                attribute: Mese
+                                              - entity: sensor.energy_mese_elettrodomestici_7
+                                                name: CONSUMO
+                                          - type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: sensor.time_on_elettrodomestici_7
+                                            attribute: costo_consumo_annuale_elettrodomestici_7
+                                            unit: €
+                                            icon: mdi:calendar-month
+                                            name: Anno
+                                            state_header: EURO
+                                            state_color: true
+                                            entities:
+                                              - entity: sensor.cicli_anno_elettrodomestici_7
+                                                name: CICLI
+                                              - entity: sensor.time_on_elettrodomestici_7
+                                                name: TEMPO
+                                                attribute: Anno
+                                              - entity: sensor.energy_anno_elettrodomestici_7
+                                                name: CONSUMO
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                              - icon: hass:bell
+                                state: >-
+                                  {{
+                                  states('input_boolean.aggiornamento_pkg_elettrodomestici_7')
+                                  }}
+                                state_styles:
+                                  'on':
+                                    icon:
+                                      color: var(--paper-item-icon-active-color)
+                                tap_action:
+                                  action: fire-dom-event
+                                  browser_mod:
+                                    service: browser_mod.popup
+                                    data:
+                                      title: Update
+                                      style: >
+                                        --popup-background-color:
+                                        var(--secondary-background-color);
+
+                                        --dialog-backdrop-filter: blur(2em)
+                                        brightness(0.75);
+                                      content:
+                                        type: entities
+                                        entities:
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - entity: >-
+                                              input_boolean.aggiornamento_pkg_elettrodomestici_7
+                                            name: Notifica Push Update
+                                            icon: mdi:bell-ring
+                                            state_color: true
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: sensor.domhouse_it
+                                            attribute: centro_controllo_elettrodomestici
+                                            state_color: true
+                                            icon: mdi:google-circles-extended
+                                            toggle: false
+                                            name: Versione
+                                            state_header: DISPONIBILE
+                                            entities:
+                                              - entity: >-
+                                                  sensor.versione_installata_centro_controllo_elettrodomestici_7
+                                                name: INSTALLATA
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                              - icon: hass:information-outline
+                                state: '{{ states(''none'') }}'
+                                state_styles:
+                                  'on':
+                                    icon:
+                                      color: var(--paper-item-icon-active-color)
+                                tap_action:
+                                  action: fire-dom-event
+                                  browser_mod:
+                                    service: browser_mod.popup
+                                    data:
+                                      title: Info Package
+                                      style: >
+                                        --popup-background-color:
+                                        var(--secondary-background-color);
+
+                                        --dialog-backdrop-filter: blur(2em)
+                                        brightness(0.75);
+                                      content:
+                                        type: markdown
+                                        content: >-
+                                          Centro Controllo Elettrodomestici
+
+                                          -------------------
+
+                                          ____
+
+                                          Scarica Update:
+
+                                          [Download](https://domhouse.it/centro-controllo-elettrodomestici-in-home-assistant)
+
+
+                                          ----
+
+                                          Created:
+                                          [DomHouse.it](https://www.domhouse.it)
+
+                                          ___
+  - type: custom:hui-element
+    card_type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            entity: climate.cdz_camera_padronale
+            show_name: true
+            show_entity_picture: true
+            state:
+              - entity_picture: /local/foto-pkg/samsung off.png
+                styles:
+                  icon:
+                    - width: 30%
+                    - opacity: 0.9
+                value: 'off'
+                name: Padronale
+              - entity_picture: /local/foto-pkg/samsung on.png
+                operator: default
+                styles:
+                  icon:
+                    - width: 30%
+                    - color: rgb(240,253,240)
+                state:
+                  - justify-self: start
+                  - font-size: 12px
+                  - padding: 0px 5px
+                value: 'on'
+                name: Padronale
+            styles:
+              card: null
+            tap_action:
+              action: null
+            hold_action:
+              action: more-info
+      - type: custom:paper-buttons-row
+        buttons:
+          - icon: hass:cog-outline
+            state: '{{ states(''group.notifiche_server'') }}'
+            state_styles:
+              'on':
+                icon:
+                  color: var(--paper-item-icon-active-color)
+            tap_action:
+              action: fire-dom-event
+              browser_mod:
+                service: browser_mod.popup
+                data:
+                  title: Impostazioni
+                  style: |
+                    --popup-background-color: var(--secondary-background-color);
+                    --dialog-backdrop-filter: blur(2em) brightness(0.75);
+                  content:
+                    type: entities
+                    style: |
+                      .card-header {
+                        padding: 0px 0px 0px 0px !important;
+                      }
+                    show_header_toggle: 'off'
+                    entities:
+                      - type: section
+                        label: Camera Padronale
+                      - type: custom:hui-element
+                        card_type: vertical-stack
+                        cards:
+                          - type: horizontal-stack
+                            cards:
+                              - type: custom:button-card
+                                entity: climate.cdz_camera_padronale
+                                show_name: false
+                                show_entity_picture: true
+                                state:
+                                  - entity_picture: /local/foto-pkg/samsung off.png
+                                    styles:
+                                      icon:
+                                        - width: 80%
+                                        - opacity: 0.9
+                                    value: 'off'
+                                  - entity_picture: /local/foto-pkg/samsung on.png
+                                    operator: default
+                                    styles:
+                                      icon:
+                                        - width: 80%
+                                        - color: rgb(240,253,240)
+                                    state:
+                                      - justify-self: start
+                                      - font-size: 12px
+                                      - padding: 0px 5px
+                                    value: 'on'
+                                styles:
+                                  card: null
+                                tap_action:
+                                  action: toggle
+                                hold_action:
+                                  action: more-info
+                          - type: custom:simple-thermostat
+                            entity: climate.cdz_camera_padronale
+                            header:
+                              name: Carol
+                              icon: mdi:air-conditioner
+                            layout:
+                              mode:
+                                headings: false
+                            sensors:
+                              - entity: >-
+                                  sensor.cdz_camera_padronale_relative_humidity_measurement
+                                name: Umidità
+                            themes:
+                              green:
+                                primary-color: '#406604'
+                                paper-toggle-button-checked-ink-color: '#609906'
+                                paper-toggle-button-checked-button-color: '#609906'
+                                paper-toggle-button-checked-bar-color: '#609906'
+                                label-badge-red: '#406604'
+                            control:
+                              swing:
+                                _name: Swing Mode
+                                _hide_when_off: true
+                              hvac:
+                                mode:
+                                  icon: true
+                              fan:
+                                _name: Fan Mode
+                                _hide_when_off: true
+                          - type: custom:bar-card
+                            show_icon: true
+                            align: split
+                            columns: 1
+                            max: 3200
+                            positions:
+                              icon: inside
+                              indicator: inside
+                              name: inside
+                              value: inside
+                            unit_of_measurement: A
+                            severity:
+                              - color: '#1e90ff'
+                                from: 0
+                                to: 600
+                              - color: Orange
+                                from: 601
+                                to: 1000
+                              - color: red
+                                from: 1001
+                                to: 4000
+                            style: |
+                              ha-card {
+                                --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                                --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                                --paper-item-icon-color: 'var(--text-primary-color';
+                                --ha-card-box-shadow: 'none';
+                              }
+                            entity: sensor.cdz_camera_padronale_energy
+                            name: Kwh
+                            entity_row: true
+                            decimal: 0
+                          - type: custom:bar-card
+                            show_icon: true
+                            align: split
+                            columns: 1
+                            max: 3200
+                            positions:
+                              icon: inside
+                              indicator: inside
+                              name: inside
+                              value: inside
+                            unit_of_measurement: W
+                            severity:
+                              - color: '#1e90ff'
+                                from: 0
+                                to: 600
+                              - color: Orange
+                                from: 601
+                                to: 1000
+                              - color: red
+                                from: 1001
+                                to: 4000
+                            style: |
+                              ha-card {
+                                --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                                --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                                --paper-item-icon-color: 'var(--text-primary-color';
+                                --ha-card-box-shadow: 'none';
+                              }
+                            entity: sensor.cdz_camera_padronale_power
+                            name: Watt
+                            entity_row: true
+                            decimal: 0
+                          - type: custom:bar-card
+                            show_icon: true
+                            align: split
+                            columns: 1
+                            max: 3200
+                            positions:
+                              icon: inside
+                              indicator: inside
+                              name: inside
+                              value: inside
+                            unit_of_measurement: W
+                            severity:
+                              - color: '#1e90ff'
+                                from: 0
+                                to: 600
+                              - color: Orange
+                                from: 601
+                                to: 1000
+                              - color: red
+                                from: 1001
+                                to: 4000
+                            style: |
+                              ha-card {
+                                --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                                --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                                --paper-item-icon-color: 'var(--text-primary-color';
+                                --ha-card-box-shadow: 'none';
+                              }
+                            entity: sensor.cdz_camera_padronale_air_quality
+                            name: Qualità Aria
+                            entity_row: true
+                            decimal: 0
+                          - type: custom:paper-buttons-row
+                            buttons:
+                              - icon: hass:cog-outline
+                                state: >-
+                                  {{
+                                  states('group.notifiche_elettrodomestici_7')
+                                  }}
+                                state_styles:
+                                  'on':
+                                    icon:
+                                      color: var(--paper-item-icon-active-color)
+                                tap_action:
+                                  action: fire-dom-event
+                                  browser_mod:
+                                    service: browser_mod.popup
+                                    data:
+                                      title: Impostazioni
+                                      style: >
+                                        --popup-background-color:
+                                        var(--secondary-background-color);
+
+                                        --dialog-backdrop-filter: blur(2em)
+                                        brightness(0.75);
+                                      content:
+                                        type: entities
+                                        entities:
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - entity: sensor.time
+                                            name: Orologio
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: >-
+                                              input_datetime.orario_fine_notifiche_elettrodomestici_7
+                                            icon: mdi:timer
+                                            name: Fascia Oraria Notifiche
+                                            state_header: FINE
+                                            entities:
+                                              - entity: >-
+                                                  input_datetime.orario_inizio_notifiche_elettrodomestici_7
+                                                name: INIZIO
+                                          - entity: >-
+                                              input_boolean.notify_push_elettrodomestici_7
+                                            type: custom:multiple-entity-row
+                                            name: Notifiche
+                                            icon: mdi:cellphone-message
+                                            state_header: PUSH
+                                            toggle: true
+                                            entities:
+                                              - entity: >-
+                                                  input_boolean.notify_telegram_elettrodomestici_7
+                                                name: TELEGRAM
+                                                toggle: true
+                                              - entity: >-
+                                                  input_boolean.notify_alexa_elettrodomestici_7
+                                                name: ALEXA
+                                                toggle: true
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: binary_sensor.ac_elettrodomestici_7
+                                            icon: mdi:flash
+                                            name: Energia
+                                            state_header: STATO
+                                            state_color: false
+                                            entities:
+                                              - entity: input_boolean.switch_elettrodomestici_7
+                                                name: SWITCH
+                                                toggle: true
+                                              - entity: >-
+                                                  input_number.soglia_lavoro_elettrodomestici_w_7
+                                                name: SOGLIA
+                                              - entity: >-
+                                                  input_number.tempo_innesco_elettrodomestici_m_7
+                                                name: DELAY OFF
+                                              - entity: >-
+                                                  input_number.avvio_ritardato_conteggio_elettrodomestici_s_7
+                                                name: DELAY ON
+                                          - type: divider
+                                          - entity: input_text.messaggio_elettrodomestico_7
+                                            type: custom:multiple-entity-row
+                                            name: CDZ Carol
+                                            state_header: MESSAGGIO
+                                            toggle: false
+                                            icon: mdi:rename
+                                            entities:
+                                              - entity: input_text.nome_elettrodomestico_7
+                                                name: CDZ Carol
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: >-
+                                              input_text.data_reset_sensori_elettrodomestici_7
+                                            name: Reset Contatori
+                                            icon: mdi:restart
+                                            state_header: ULTIMO RESET
+                                            state_color: true
+                                            entities:
+                                              - type: button
+                                                name: ESEGUI
+                                                icon: mdi:button-pointer
+                                                tap_action:
+                                                  action: call-service
+                                                  service: script.reset_sensori_elettrodomestici_7
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: input_number.costo_energia_asciugatrice
+                                            name: Costo Energia
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                              - icon: hass:chart-line
+                                state: '{{ states(''xxx'') }}'
+                                state_styles:
+                                  'on':
+                                    icon:
+                                      color: var(--paper-item-icon-active-color)
+                                tap_action:
+                                  action: fire-dom-event
+                                  browser_mod:
+                                    service: browser_mod.popup
+                                    data:
+                                      title: Statistiche
+                                      style: >
+                                        --popup-background-color:
+                                        var(--secondary-background-color);
+
+                                        --dialog-backdrop-filter: blur(2em)
+                                        brightness(0.75);
+                                      content:
+                                        type: entities
+                                        entities:
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - entity: sensor.time_on_elettrodomestici_7
+                                            attribute: costo_ciclo_elettrodomestici_7
+                                            type: custom:multiple-entity-row
+                                            icon: mdi:power-plug
+                                            unit: €
+                                            name: Elettrodomestico
+                                            state_header: EURO
+                                            state_color: true
+                                            entities:
+                                              - entity: sensor.time_on_elettrodomestici_7
+                                                attribute: terminato
+                                                name: STATO
+                                              - type: attribute
+                                                entity: sensor.time_on_elettrodomestici_7
+                                                name: TEMPO
+                                                attribute: tempo_ciclo_elettrodomestici_7
+                                              - entity: sensor.time_on_elettrodomestici_7
+                                                attribute: consumo_ciclo_elettrodomestici_7
+                                                name: CONSUMO
+                                          - type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: sensor.time_on_elettrodomestici_7
+                                            attribute: costo_consumo_ieri_elettrodomestici_7
+                                            unit: €
+                                            name: Ieri
+                                            state_header: EURO
+                                            state_color: true
+                                            entities:
+                                              - entity: sensor.cicli_oggi_elettrodomestici_7
+                                                name: CICLI
+                                                attribute: last_period
+                                              - entity: sensor.time_on_elettrodomestici_7
+                                                attribute: Ieri
+                                                name: TEMPO
+                                              - entity: sensor.energy_oggi_elettrodomestici_7
+                                                attribute: last_period
+                                                unit: kWh
+                                                name: CONSUMO
+                                          - type: divider
+                                          - entity: sensor.time_on_elettrodomestici_7
+                                            type: custom:multiple-entity-row
+                                            attribute: >-
+                                              costo_consumo_giornaliero_elettrodomestici_7
+                                            unit: €
+                                            name: Oggi
+                                            state_header: EURO
+                                            icon: mdi:calendar-blank
+                                            state_color: true
+                                            entities:
+                                              - entity: sensor.cicli_oggi_elettrodomestici_7
+                                                name: CICLI
+                                              - entity: sensor.time_on_elettrodomestici_7
+                                                attribute: Oggi
+                                                name: TEMPO
+                                              - entity: sensor.energy_oggi_elettrodomestici_7
+                                                name: CONSUMO
+                                          - type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: sensor.time_on_elettrodomestici_7
+                                            attribute: costo_consumo_mensile_elettrodomestici_7
+                                            unit: €
+                                            icon: mdi:calendar-today
+                                            name: Mese
+                                            state_header: EURO
+                                            state_color: true
+                                            entities:
+                                              - entity: sensor.cicli_mese_elettrodomestici_7
+                                                name: CICLI
+                                              - entity: sensor.time_on_elettrodomestici_7
+                                                name: TEMPO
+                                                attribute: Mese
+                                              - entity: sensor.energy_mese_elettrodomestici_7
+                                                name: CONSUMO
+                                          - type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: sensor.time_on_elettrodomestici_7
+                                            attribute: costo_consumo_annuale_elettrodomestici_7
+                                            unit: €
+                                            icon: mdi:calendar-month
+                                            name: Anno
+                                            state_header: EURO
+                                            state_color: true
+                                            entities:
+                                              - entity: sensor.cicli_anno_elettrodomestici_7
+                                                name: CICLI
+                                              - entity: sensor.time_on_elettrodomestici_7
+                                                name: TEMPO
+                                                attribute: Anno
+                                              - entity: sensor.energy_anno_elettrodomestici_7
+                                                name: CONSUMO
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                              - icon: hass:bell
+                                state: >-
+                                  {{
+                                  states('input_boolean.aggiornamento_pkg_elettrodomestici_7')
+                                  }}
+                                state_styles:
+                                  'on':
+                                    icon:
+                                      color: var(--paper-item-icon-active-color)
+                                tap_action:
+                                  action: fire-dom-event
+                                  browser_mod:
+                                    service: browser_mod.popup
+                                    data:
+                                      title: Update
+                                      style: >
+                                        --popup-background-color:
+                                        var(--secondary-background-color);
+
+                                        --dialog-backdrop-filter: blur(2em)
+                                        brightness(0.75);
+                                      content:
+                                        type: entities
+                                        entities:
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - entity: >-
+                                              input_boolean.aggiornamento_pkg_elettrodomestici_7
+                                            name: Notifica Push Update
+                                            icon: mdi:bell-ring
+                                            state_color: true
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                                          - type: custom:multiple-entity-row
+                                            entity: sensor.domhouse_it
+                                            attribute: centro_controllo_elettrodomestici
+                                            state_color: true
+                                            icon: mdi:google-circles-extended
+                                            toggle: false
+                                            name: Versione
+                                            state_header: DISPONIBILE
+                                            entities:
+                                              - entity: >-
+                                                  sensor.versione_installata_centro_controllo_elettrodomestici_7
+                                                name: INSTALLATA
+                                          - style:
+                                              background: '#62717b'
+                                              height: 1px
+                                              margin-left: auto
+                                              margin-right: auto
+                                            type: divider
+                              - icon: hass:information-outline
+                                state: '{{ states(''none'') }}'
+                                state_styles:
+                                  'on':
+                                    icon:
+                                      color: var(--paper-item-icon-active-color)
+                                tap_action:
+                                  action: fire-dom-event
+                                  browser_mod:
+                                    service: browser_mod.popup
+                                    data:
+                                      title: Info Package
+                                      style: >
+                                        --popup-background-color:
+                                        var(--secondary-background-color);
+
+                                        --dialog-backdrop-filter: blur(2em)
+                                        brightness(0.75);
+                                      content:
+                                        type: markdown
+                                        content: >-
+                                          Centro Controllo Elettrodomestici
+
+                                          -------------------
+
+                                          ____
+
+                                          Scarica Update:
+
+                                          [Download](https://domhouse.it/centro-controllo-elettrodomestici-in-home-assistant)
+
+
+                                          ----
+
+                                          Created:
+                                          [DomHouse.it](https://www.domhouse.it)
+
+                                          ___
+type: horizontal-stack
